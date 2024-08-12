@@ -4,7 +4,7 @@ This tutorial familiarizes participants with basic Kubernetes Operations, such a
 
 ## Start  the cluster 
 
-1. Choose the deathstarbench-k8s-setup profile, which is part of the Tracing-Pythia project.
+1. Choose the deathstarbench-k8s-setup [profile](https://www.cloudlab.us/p/Tracing-Pythia/hotelreserv-k8s-setup), which is part of the Tracing-Pythia project.
 2. Enter the profile configuration options
      1. DeathStarBench in this profile is pre-built to work with Intel Machines, so choose machines w/Intel CPUs.  Good choices include c6525-25g and c6525-100g in CloudLab Utah.  
      2. You may or may not wish to increase the number of nodes.
