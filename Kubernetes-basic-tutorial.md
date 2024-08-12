@@ -27,7 +27,7 @@ Deployments allows users to configure Kubrnetes Pods and Replicas.
    *`kubectl get deployments` lists all services deployed for HotelReservation. Such services' `NAMESPACE` is `default`.
    *`kubectl get deployments -A` lists all services deployed for HotelReservation as well as kubernetes services. The additional system services' `NAMESPACE` is `kube-system`.
 
-![alt text](./screenshots/1.%20list%20all.png)
+![alt text](./screenshots/1_list_all.png)
 
 2. **Get deployment info**: `kubectl describe deployments/<name>` describes details of deployments
    * 'kubectl get deployment/frontend` shows resource allocation and status informaton for the Frontend.
@@ -78,24 +78,23 @@ rajas@node-0:~$
 
 3. **Get each service's deployment info**: `more <service_name>-deployment.yaml` describes details of deployment of one service. The unit of CPU under `resources` is `milicore`. 1000 `milicore` = 1 CPU core. `requests` specifies the amount of CPU guaranteed for this service and `limits` specifies the maximum allowed to allocate. 
 
-![Home Page](./screenshots/3. recommendation-deployment.png)
+![alt text](./screenshots/3_recommendation_deployment.png)
 
 4. **Change configuration**: In general, use `kubectl apply -h` to see a list of flags for different options for configuration update. One example is to copy one service's deployment yaml file, `recommendation-deployment.yaml`, to home directory and modify it. For example, change `replicas` and `requests`. To apply the new deployment policy, use `kubectl apply -f recommendation-deployment.yaml`. To check if the new service configuration is succesfully rolled out, use `kubectl rollout status deployments/recommendation`. Next, to get the details of deployments, use `kubectl describe deployments/recommendation`. The `Events` part should reflect the configuration policy changes.  
 
-![Home Page](./screenshots/4. file update, change configuration.png)
+![alt text](./screenshots/4_change_configuration.png)
 
 5. **Scale one service**: To scale a specific  service, use `kubectl scale deployments/<name> --replicas=<number>`. One example is `kubectl scale deployments/frontend --replicas=2`. Then, use `kubectl describe deployments/<name>` to check if the deployment details, indicated in the `Events`, reflect the scaling policy change. 
 
-![Home Page](./screenshots/5. scale up event.png)
-
+![alt text](./screenshots/5_scale.png)
 
 6. **Other YAML files for a service** `recommendation_service.yaml` specifies a service's label and ports to expose it to other services within the cluster. `recommendation_pvc.yaml` defines a Persistent Volume Claim (PVC) to request storage for the `recommendation` service. `recommendation_persistent-volume.yaml` specifies a Persistent Volume that provides the actual storage resource to which the PVC will bind.
 
-![Home Page](./screenshots/6. yaml files.png)
+![alt text](./screenshots/6_yaml_files.png)
 
 7. **Port numbers** `docker-compose.yaml` specifies different services being laughted. It also specifies the mapping from external port numbers that is exposed publicly and internal port numbers that are inside a docker container. The external port numbers need to be unique.
 
-![Home Page](./screenshots/7. port numbers.png)
+![alt text](./screenshots/7_port_numbers.png)
 
 8. **Differece between service.yaml and deployment.yaml** `recommendation-service.yaml` defines network access and loadBlancing strategies for a service, specifies stable IP address, port numbers, and a well-known DNS name to route traffic to corresponding pods.`recommendation-service.yaml` conceptually defines that a group of pods belong to one service and the pods are managed by policy specified by the `loadBalancer` field. When the field is left blank, it means the policy is left to the cloud provider to define it. `recommendation-deployment.yaml`, on the other hand, specifies deployment details including the number of replicas, images and resource limits. 
 
