@@ -27,7 +27,7 @@ Deployments allows users to configure Kubrnetes Pods and Replicas.
    *`kubectl get deployments` lists all services deployed for HotelReservation. Such services' `NAMESPACE` is `default`.
    *`kubectl get deployments -A` lists all services deployed for HotelReservation as well as kubernetes services. The additional system services' `NAMESPACE` is `kube-system`.
 
-![Home Page](./screenshots/1. list all.png)
+![alt text](./screenshots/1.%20list%20all.png)
 
 2. **Get deployment info**: `kubectl describe deployments/<name>` describes details of deployments
    * 'kubectl get deployment/frontend` shows resource allocation and status informaton for the Frontend.
