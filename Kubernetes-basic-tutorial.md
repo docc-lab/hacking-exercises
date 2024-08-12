@@ -11,7 +11,8 @@ This tutorial familiarizes participants with basic Kubernetes Operations, such a
      3. You can leave the rest of the options as default.
      4.  Read the README for deathstarbench-k8s-setup profile, which provides detailed information about the profile and how deathstarbench is configured.
      5. You will receive two emails, one indicating the clsuter is setting up and another indicating the cluster is ready.  Wait for the latter email before trying to use the cluster.  It can take up to 15 min. 
-     6.  Once you receive the email, HotelReservation should be running within Kubernetes 
+     6.  Once you receive the email, HotelReservation should be running within Kubernetes
+3. Please follow this [guide](https://github.com/docc-lab/dsb_k8s) to make sure hotelReservation application is running in a Kubernetes cluster. 
 
 ## Default configuration
 1. (This should be in deathstarbench-k8s-setup-profile)
