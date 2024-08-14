@@ -124,3 +124,8 @@ rajas@node-0:~$
    external port numbers need to be unique.
 
 ![alt text](./screenshots/8_port_numbers.png)
+
+# Kubernetes Operators 
+
+1. Download go wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz and place it in /usr/src 
+2. set GOPATH, GOROOT, 
