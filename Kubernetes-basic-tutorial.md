@@ -127,5 +127,4 @@ rajas@node-0:~$
 
 # Kubernetes Operators 
 
-1. Download go wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz and place it in /usr/src 
-2. set GOPATH, GOROOT, 
+Check instructions in [the README under our lab's DeathStarBench fork](https://github.com/docc-lab/DeathStarBench/tree/operator/hotelReservation/k8s-operator/frontservices-operator)
