@@ -9,28 +9,28 @@ This tutorial familiarizes participants with basic Kubernetes Operations, such a
      1. DeathStarBench in this profile is pre-built to work with Intel Machines, so choose machines w/Intel CPUs.  Good choices include c6525-25g and c6525-100g in CloudLab Utah.  
      2. You may or may not wish to increase the number of nodes.
      3. You can leave the rest of the options as default.
-     4.  Read the README for deathstarbench-k8s-setup profile, which provides detailed information about the profile and how deathstarbench is configured.
-     5. You will receive two emails, one indicating the clsuter is setting up and another indicating the cluster is ready.  Wait for the latter email before trying to use the cluster.  It can take up to 15 min. 
-     6.  Once you receive the email, HotelReservation should be running within Kubernetes
-3. Please follow this [guide](https://github.com/docc-lab/dsb_k8s) to make sure hotelReservation application is running in a Kubernetes cluster. 
+     4. Read the README for deathstarbench-k8s-setup profile, which provides detailed information about the profile and how deathstarbench is configured.
+     5. You will receive two emails, one indicating the cluster is setting up and another indicating the cluster is ready. Wait for the second email before trying to use the cluster. It can take up to 15 min or longer. 
+     6.  Once you receive the email, the HotelReservation application should be running within Kubernetes.
+3. Please follow this [guide](https://github.com/docc-lab/dsb_k8s) to make sure that the hotelReservation application is running in a Kubernetes cluster. 
 
 ## Default configuration
 1. (This should be in deathstarbench-k8s-setup-profile)
 
 ## Explore Kubernetes Commands
 
-`kubectl` is the command for interfacing with and managing kubernetes clusters.  This [website](https://spacelift.io/blog/kubernetes-cheat-sheet) and this [one] (https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)  provide a nice overview of this command.  Please read through them.  
+`kubectl` is the command for interfacing with and managing kubernetes clusters.  This [website](https://spacelift.io/blog/kubernetes-cheat-sheet) and this [one] (https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) provide a nice overview of this command.  Please read through them.  
 
 #### Deployments
 Deployments allows users to configure Kubrnetes Pods and Replicas.  
 1. **List deployments**: `kubectl get deployments` lists all deployed services
    *`kubectl get deployments` lists all services deployed for HotelReservation. Such services' `NAMESPACE` is `default`.
-   *`kubectl get deployments -A` lists all services deployed for HotelReservation as well as kubernetes services. The additional system services' `NAMESPACE` is `kube-system`.
+   *`kubectl get deployments -A` lists all services deployed for HotelReservation as well as Kubernetes services. The additional system services' `NAMESPACE` is `kube-system`.
 
 ![alt text](./screenshots/1_list_all.png)
 
 2. **Get deployment info**: `kubectl describe deployments/<name>` describes details of deployments
-   * 'kubectl get deployment/frontend` shows resource allocation and status informaton for the Frontend.
+   * 'kubectl get deployment/frontend` shows resource allocation and status information for the Frontend.
 ```
       Name:                   frontend
 Namespace:              default
@@ -87,23 +87,23 @@ rajas@node-0:~$
 ![alt text](./screenshots/3_recommendation_deployment.png)
 
 4. **Change configuration**: In general, use `kubectl apply -h` to see
-   a list of flags for different options for configuration update. One
-   example is to copy one service's deployment yaml file, to home
+   a list of flags for different options for configuration updates. One
+   example is to copy one service's deployment yaml file to home
    directory and modify it, `cp recommendation-deployment.yaml ~`. For
    example, change `replicas` and `requests`. To apply the new
    deployment policy, use `kubectl apply -f recommendation-deployment.yaml`. To check if the new service
-   configuration is succesfully rolled out, use `kubectl rollout status deployments/recommendation`. Next, to get the details of
+   configuration is successfully rolled out, use `kubectl rollout status deployments/recommendation`. To get the details of
    deployments, use `kubectl describe deployments/recommendation`. The
    `Events` part should reflect the
    configuration policy changes.  
 
 ![alt text](./screenshots/4_change_configuration.png)
 
-5. **Scale one service**: To scale a specific  service, use `kubectl scale deployments/<name> --replicas=<number>`. One example is `kubectl scale deployments/frontend --replicas=2`. Then, use `kubectl describe deployments/<name>` to check if the deployment details, indicated in the `Events`, reflect the scaling policy change. 
+5. **Scale one service**: To scale a specific service, use `kubectl scale deployments/<name> --replicas=<number>`. One example is `kubectl scale deployments/frontend --replicas=2`. Then, use `kubectl describe deployments/<name>` to check if the deployment details, indicated in the `Events`, reflect the scaling policy change. 
 
 ![alt text](./screenshots/5_scale.png)
 
-6. **Other YAML files for a service** In subdirectory for a
+6. **Other YAML files for a service** In the subdirectory for a
    service, `kubenetes/<name>`, other yaml files exist. For example, `recommendation_service.yaml` specifies a service's
    label and ports to expose it to other services within the cluster.
    `recommendation_pvc.yaml` defines a Persistent Volume Claim (PVC)
@@ -114,12 +114,12 @@ rajas@node-0:~$
 
 ![alt text](./screenshots/6_yaml_files.png)
 
-7. **Differece between service.yaml and deployment.yaml** `recommendation-service.yaml` defines network access and loadBlancing strategies for a service, specifies stable IP address, port numbers, and a well-known DNS name to route traffic to corresponding pods.`recommendation-service.yaml` conceptually defines that a group of pods belong to one service and the pods are managed by policy specified by the `loadBalancer` field. When the field is left blank, it means the policy is left to the cloud provider to define it. `recommendation-deployment.yaml`, on the other hand, specifies deployment details including the number of replicas, images and resource limits. 
+7. **Difference between service.yaml and deployment.yaml** `recommendation-service.yaml` defines network access and loadBlancing strategies for a service, specifies stable IP address, port numbers, and a well-known DNS name to route traffic to corresponding pods.`recommendation-service.yaml` conceptually defines that a group of pods belong to one service and the pods are managed by policy specified by the `loadBalancer` field. When the field is left blank, it means the policy is left to the cloud provider to define it. `recommendation-deployment.yaml`, on the other hand, specifies deployment details including the number of replicas, images, and resource limits. 
 
 8. **Port numbers** At the application's top directory,
    `/local/DeathStarBench/hotelReservation`, the `docker-compose.yaml`
-   specifies different services being laughted. It also specifies the
-   mapping from external port numbers that is exposed publicly and
+   specifies different services being launched. It also specifies the
+   mapping from external port numbers that are exposed publicly and
    internal port numbers that are inside a docker container. The
    external port numbers need to be unique.
 
